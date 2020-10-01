@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta7
+kind: Config
+metadata:
+  name: ticketing
+build:
+  artifacts:
+  - image: shockwater/auth
+    context: auth
+deploy:
+  kubectl:
+    manifests:
+    - infra/k8s/auth-deployment.yaml
