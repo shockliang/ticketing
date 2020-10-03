@@ -10,3 +10,4 @@ deploy:
   kubectl:
     manifests:
     - infra/k8s/auth-deployment.yaml
+    - infra/k8s/ingress-service.yaml
