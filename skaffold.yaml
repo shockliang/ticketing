@@ -6,9 +6,12 @@ build:
   artifacts:
   - image: shockwater/auth
     context: auth
+  - image: shockwater/client
+    context: client
 deploy:
   kubectl:
     manifests:
+    - infra/k8s/client-deployment.yaml
     - infra/k8s/auth-deployment.yaml
     - infra/k8s/auth-mongo-deployment.yaml
     - infra/k8s/ingress-service.yaml
