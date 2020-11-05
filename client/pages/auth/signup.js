@@ -1,12 +1,20 @@
 import {useState} from 'react';
+import axios from 'axios';
 
 export default () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
+
+    const response = await axios.post('/api/users/signup', {
+      email, password
+    });
+
+    console.log(response.data);
   }
+
   return(
     <form onSubmit={onSubmit}>
       <h1>Sign Up</h1>
@@ -21,8 +29,8 @@ export default () => {
         <label>Password</label>
         <input
           value={password}
-          onChange={e => e.target.value}
-          type={"password"}
+          onChange={e => setPassword(e.target.value)}
+          type="password"
           className={"form-control"} />
       </div>
       <button className={"btn btn-primary"}>Sign Up</button>
