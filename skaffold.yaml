@@ -8,6 +8,8 @@ build:
     context: auth
   - image: shockwater/client
     context: client
+  - image: shockwater/tickets
+    context: tickets
 deploy:
   kubectl:
     manifests:
@@ -15,3 +17,4 @@ deploy:
     - infra/k8s/auth-deployment.yaml
     - infra/k8s/auth-mongo-deployment.yaml
     - infra/k8s/ingress-service.yaml
+    - infra/k8s/tickets-deployment.yaml
