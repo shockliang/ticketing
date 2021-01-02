@@ -10,6 +10,8 @@ build:
     context: client
   - image: shockwater/tickets
     context: tickets
+  - image: shockwater/orders
+    context: orders
 deploy:
   kubectl:
     manifests:
@@ -20,3 +22,5 @@ deploy:
     - infra/k8s/tickets-deployment.yaml
     - infra/k8s/tickets-mongo-deployment.yaml
     - infra/k8s/nats-deployment.yaml
+    - infra/k8s/orders-deployment.yaml
+    - infra/k8s/orders-mongo-deployment.yaml
