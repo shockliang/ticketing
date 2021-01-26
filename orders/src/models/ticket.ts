@@ -18,24 +18,26 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
     build(attrs: TicketAttrs): TicketDoc;
 }
 
-const ticketSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true,
-        min: 0
-    }
-}, {
-    toJSON: {
-        transform(doc, ret) {
-            ret.id = ret._id;
-            delete ret._id;
+const ticketSchema = new mongoose.Schema(
+    {
+        title: {
+            type: String,
+            required: true
+        },
+        price: {
+            type: Number,
+            required: true,
+            min: 0
         }
-    }
-});
+    },
+    {
+        toJSON: {
+            transform(doc, ret) {
+                ret.id = ret._id;
+                delete ret._id;
+            }
+        }
+    });
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
     return new Ticket({
@@ -48,6 +50,7 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
 ticketSchema.methods.isReserved = async function () {
     // this equals to the ticket document that we just called 'isReserved' on
     const existingOrder = await Order.findOne({
+        //@ts-ignore
         ticket: this,
         status: {
             $in: [
