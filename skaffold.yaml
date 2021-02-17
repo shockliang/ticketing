@@ -12,6 +12,8 @@ build:
     context: tickets
   - image: shockwater/orders
     context: orders
+  - image: shockwater/expiration
+    context: expiration
 deploy:
   kubectl:
     manifests:
