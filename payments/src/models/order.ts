@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {updateIfCurrentPlugin} from "mongoose-update-if-current";
 import {OrderStatus} from "@shockticketing/common";
 
 interface OrderAttrs {
@@ -51,6 +52,9 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
         status: attrs.status
     });
 }
+
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 
 const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
 
