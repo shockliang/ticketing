@@ -42,6 +42,8 @@ router.post('/api/payments',
             amount: order.price * 100,
             source: token
         });
+
+        res.send({success: true});
     });
 
 export {router as createChargeRouter};
