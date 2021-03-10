@@ -4,6 +4,7 @@ import {app} from "../../app";
 import {Order} from "../../models/order";
 import {OrderStatus} from "@shockticketing/common";
 import {stripe} from '../../stripe';
+import {Payment} from "../../models/payment";
 
 jest.mock('../../stripe');
 
@@ -83,4 +84,9 @@ it('returns a 201 with valid input', async () => {
     expect(chargeOption.source).toEqual('tok_visa');
     expect(chargeOption.amount).toEqual(25 * 100);
     expect(chargeOption.currency).toEqual('usd');
+
+    const payment = await Payment.find({
+        orderId: order.id,
+    });
+    expect(payment).not.toBeNaN();
 });
