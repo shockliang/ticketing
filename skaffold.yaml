@@ -14,6 +14,8 @@ build:
     context: orders
   - image: shockwater/expiration
     context: expiration
+  - image: shockwater/payments
+    context: payments
 deploy:
   kubectl:
     manifests:
@@ -28,3 +30,5 @@ deploy:
     - infra/k8s/orders-mongo-deployment.yaml
     - infra/k8s/expiration-deployment.yaml
     - infra/k8s/expiration-redis-deployment.yaml
+    - infra/k8s/payments-deployment.yaml
+    - infra/k8s/payments-mongo-deployment.yaml
